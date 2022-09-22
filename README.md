@@ -1,6 +1,7 @@
 # DBML - DOSBox MiniLauncher
 
 This is a dead simple launcher/frontend for using DOSBox.
+Just unzip the archive to your main DOSBox directory.
 
 ### 2 minute super short introduction:
 
