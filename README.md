@@ -1,6 +1,4 @@
-# DBML
-
-## DOSBox MiniLauncher
+# DBML - DOSBox MiniLauncher
 
 This is a dead simple launcher/frontend for using DOSBox.
 
@@ -13,4 +11,4 @@ https://user-images.githubusercontent.com/13250690/191737485-c0b4e0d3-fafb-4038-
 
 
 ### Known issues (that most likely won't be fixed):
-- executable file name ("commands to execute") must be a short filename (8.3 format). For example "starcon.exe" will work but "Star Control.exe" won't.
+- executable file name ("commands to execute") must be a short filename (8.3 format). For example "starcon.exe" will work but "Star Control.exe" won't
