@@ -14,13 +14,8 @@ namespace DBML
         const string entriesFile = "DBML.json";
         const string tmpBatFile = "(DBML).BAT";
         const string badEntryIndicator = "?";
-        const string favouriteEntryIndicator = "♥";
         bool startupError = false;
-
-        //C:\Users\<username>\AppData\Local\DOSBox\
-        string defaultCfgFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        //Application.StartupPath + @"\DBML-baseline.conf";
-
+        string defaultCfgFile = Application.StartupPath + @"\DBML-baseline.conf";
         string tmpCfgFile = Application.StartupPath + @"\DBML-running.conf";
         string dosBoxExeFile = Directory.GetCurrentDirectory() + "\\dosbox.exe";
         int previdx = -1;
@@ -32,11 +27,10 @@ namespace DBML
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            defaultCfgFile = defaultCfgFile.Remove(defaultCfgFile.LastIndexOf('\\')) + @"\Local\DOSBox\dosbox-staging.conf";
             if (!File.Exists(defaultCfgFile))
             {
                 startupError = true;
-                MessageBox.Show($"DBML-baseline.conf file not found in the application folder:\n\n{defaultCfgFile}\n\nThis file must exist to provide the baseline DOSBox configuration. Application will terminate.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("DBML-baseline.conf file not found in the application folder. This file must exist to provide the baseline DOSBox configuration. Application will terminate.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
 
@@ -180,9 +174,9 @@ namespace DBML
                 else btnDelete_Click(this, null);
             if (e.KeyCode == Keys.F1)
             {
-                if (tbFriendlyName.Text.StartsWith(favouriteEntryIndicator))
+                if (tbFriendlyName.Text.StartsWith("♥"))
                     tbFriendlyName.Text = tbFriendlyName.Text.Remove(0, 1);
-                else tbFriendlyName.Text = favouriteEntryIndicator + tbFriendlyName.Text;
+                else tbFriendlyName.Text = "♥" + tbFriendlyName.Text;
 
                 Entry en = (Entry)lbEntryList.SelectedItem;
                 en.FriendlyName = tbFriendlyName.Text;
@@ -242,51 +236,44 @@ namespace DBML
 
         private void StartTheGame(int bits)
         {
-            // parsing new configuration will automatically put parameters into their correct sections
             List<string> notFoundLines = new List<string>();
             List<string> cfglines = File.ReadAllLines(defaultCfgFile).ToList();
-            List<string> newCfgLines = new List<string>();
             foreach (string s in tbDOSBoxConfig.Lines)
             {
                 // skip user lines that are either comments or not parameters
-                if (s.StartsWith("#")) continue; 
                 if (!s.Contains("=")) continue;
-                
+                if (s.StartsWith("#")) continue;
                 bool found = false;
-                string currentSection = "";
                 for (int i = 0; i < cfglines.Count; i++)
                 {
-                    if (cfglines[i].StartsWith("[")) { currentSection = cfglines[i].Trim(); continue; }
                     // skip processing default config lines that are either comments or not parameters
                     if (!cfglines[i].Contains("=")) continue;
                     if (cfglines[i].StartsWith("#")) continue;
                     if (cfglines[i].Substring(0, cfglines[i].IndexOf("=")).Trim() == s.Substring(0, s.IndexOf("=")).Trim())
                     {
                         found = true;
-                        newCfgLines.Add(currentSection);
-                        newCfgLines.Add(s);
-                        break;
+                        cfglines[i] = s;
                     }
-                    //if (found) break;
+                    if (found) break;
                 }
                 if (!found)
                     notFoundLines.Add(s);
             }
 
             if (notFoundLines.Count > 0)
-                if (MessageBox.Show("Failed to find the following entries in the DOSBox baseline configuration file: \n\n" +
-                    string.Join(Environment.NewLine, notFoundLines) + "\n\nDo you want to run " + lbEntryList.Text + " anyway?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                if (MessageBox.Show("Failed to find the following entries in the DOSBox configuration file: \n\n" +
+                    string.Join(Environment.NewLine, notFoundLines) + "\n\nI don't know which section of the configuration file " +
+                    "they belong to so I can't insert them automatically. Please see the baseline configuration file and " +
+                    "add these entries in appropriate section manually.\n\nDo you want to run " + lbEntryList.Text + " now without these entries?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                     return;
-            
-            //File.WriteAllLines(tmpCfgFile, cfglines);
-            File.WriteAllLines(tmpCfgFile, newCfgLines);// tbDOSBoxConfig.Lines);
-            
+
+            File.WriteAllLines(tmpCfgFile, cfglines);
             File.WriteAllText(tbPath.Text + "\\" + tmpBatFile, "@" + tbLaunch.Text);
 
             Process p = new Process();
             p.StartInfo.WorkingDirectory = Path.GetDirectoryName(dosBoxExeFile);
             p.StartInfo.FileName = "dosbox.exe";
-            p.StartInfo.Arguments = $"-userconf -conf \"{tmpCfgFile}\" \"{tbPath.Text}\\{tmpBatFile}\"";
+            p.StartInfo.Arguments = $"-conf \"{tmpCfgFile}\" \"{tbPath.Text}\\{tmpBatFile}\"";
             //p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             //p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             p.Start();

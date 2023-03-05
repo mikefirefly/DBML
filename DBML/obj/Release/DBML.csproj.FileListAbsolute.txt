@@ -1,0 +1,11 @@
+D:\github\DBML\DBML\bin\Release\DBML.exe.config
+D:\github\DBML\DBML\bin\Release\DBML.exe
+D:\github\DBML\DBML\bin\Release\DBML.pdb
+D:\github\DBML\DBML\obj\Release\DBML.csproj.AssemblyReference.cache
+D:\github\DBML\DBML\obj\Release\DBML.csproj.SuggestedBindingRedirects.cache
+D:\github\DBML\DBML\obj\Release\DBML.MainForm.resources
+D:\github\DBML\DBML\obj\Release\DBML.Properties.Resources.resources
+D:\github\DBML\DBML\obj\Release\DBML.csproj.GenerateResource.cache
+D:\github\DBML\DBML\obj\Release\DBML.csproj.CoreCompileInputs.cache
+D:\github\DBML\DBML\obj\Release\DBML.exe
+D:\github\DBML\DBML\obj\Release\DBML.pdb

@@ -242,32 +242,25 @@ namespace DBML
 
         private void StartTheGame(int bits)
         {
-            // parsing new configuration will automatically put parameters into their correct sections
             List<string> notFoundLines = new List<string>();
             List<string> cfglines = File.ReadAllLines(defaultCfgFile).ToList();
-            List<string> newCfgLines = new List<string>();
             foreach (string s in tbDOSBoxConfig.Lines)
             {
                 // skip user lines that are either comments or not parameters
-                if (s.StartsWith("#")) continue; 
                 if (!s.Contains("=")) continue;
-                
+                if (s.StartsWith("#")) continue;
                 bool found = false;
-                string currentSection = "";
                 for (int i = 0; i < cfglines.Count; i++)
                 {
-                    if (cfglines[i].StartsWith("[")) { currentSection = cfglines[i].Trim(); continue; }
                     // skip processing default config lines that are either comments or not parameters
                     if (!cfglines[i].Contains("=")) continue;
                     if (cfglines[i].StartsWith("#")) continue;
                     if (cfglines[i].Substring(0, cfglines[i].IndexOf("=")).Trim() == s.Substring(0, s.IndexOf("=")).Trim())
                     {
                         found = true;
-                        newCfgLines.Add(currentSection);
-                        newCfgLines.Add(s);
-                        break;
+                        cfglines[i] = s;
                     }
-                    //if (found) break;
+                    if (found) break;
                 }
                 if (!found)
                     notFoundLines.Add(s);
@@ -277,10 +270,9 @@ namespace DBML
                 if (MessageBox.Show("Failed to find the following entries in the DOSBox baseline configuration file: \n\n" +
                     string.Join(Environment.NewLine, notFoundLines) + "\n\nDo you want to run " + lbEntryList.Text + " anyway?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                     return;
-            
+
             //File.WriteAllLines(tmpCfgFile, cfglines);
-            File.WriteAllLines(tmpCfgFile, newCfgLines);// tbDOSBoxConfig.Lines);
-            
+            File.WriteAllLines(tmpCfgFile, tbDOSBoxConfig.Lines);
             File.WriteAllText(tbPath.Text + "\\" + tmpBatFile, "@" + tbLaunch.Text);
 
             Process p = new Process();
