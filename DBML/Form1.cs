@@ -283,10 +283,12 @@ namespace DBML
             
             File.WriteAllText(tbPath.Text + "\\" + tmpBatFile, "@" + tbLaunch.Text);
 
+            string showstatus = "";
+            if (!cbStatusWindow.Checked) showstatus = "-noconsole";
             Process p = new Process();
             p.StartInfo.WorkingDirectory = Path.GetDirectoryName(dosBoxExeFile);
             p.StartInfo.FileName = "dosbox.exe";
-            p.StartInfo.Arguments = $"-userconf -conf \"{tmpCfgFile}\" \"{tbPath.Text}\\{tmpBatFile}\"";
+            p.StartInfo.Arguments = $"{showstatus} -userconf -conf \"{tmpCfgFile}\" \"{tbPath.Text}\\{tmpBatFile}\"";
             //p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             //p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             p.Start();
