@@ -47,6 +47,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.cbStatusWindow = new System.Windows.Forms.CheckBox();
+            this.btnOpenDefaultConfig = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,9 +84,10 @@
             this.tbDOSBoxConfig.Location = new System.Drawing.Point(446, 194);
             this.tbDOSBoxConfig.Multiline = true;
             this.tbDOSBoxConfig.Name = "tbDOSBoxConfig";
-            this.tbDOSBoxConfig.Size = new System.Drawing.Size(410, 260);
+            this.tbDOSBoxConfig.Size = new System.Drawing.Size(410, 282);
             this.tbDOSBoxConfig.TabIndex = 1;
             this.tbDOSBoxConfig.TextChanged += new System.EventHandler(this.tbDOSBoxConfig_TextChanged);
+            this.tbDOSBoxConfig.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDOSBoxConfig_KeyDown);
             // 
             // tbPath
             // 
@@ -147,9 +149,9 @@
             this.btnStart32.Enabled = false;
             this.btnStart32.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnStart32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart32.Location = new System.Drawing.Point(245, 462);
+            this.btnStart32.Location = new System.Drawing.Point(241, 486);
             this.btnStart32.Name = "btnStart32";
-            this.btnStart32.Size = new System.Drawing.Size(83, 39);
+            this.btnStart32.Size = new System.Drawing.Size(83, 29);
             this.btnStart32.TabIndex = 4;
             this.btnStart32.Text = "START";
             this.btnStart32.UseVisualStyleBackColor = false;
@@ -166,9 +168,9 @@
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.Enabled = false;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDelete.Location = new System.Drawing.Point(117, 460);
+            this.btnDelete.Location = new System.Drawing.Point(117, 486);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(83, 41);
+            this.btnDelete.Size = new System.Drawing.Size(83, 29);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -202,9 +204,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Enabled = false;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnSave.Location = new System.Drawing.Point(279, 446);
+            this.btnSave.Location = new System.Drawing.Point(335, 468);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(138, 29);
+            this.btnSave.Size = new System.Drawing.Size(83, 29);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -230,39 +232,50 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnOpenDefaultConfig);
             this.panel1.Controls.Add(this.btnOpenPathInExplorer);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Location = new System.Drawing.Point(436, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(427, 487);
+            this.panel1.Size = new System.Drawing.Size(427, 509);
             this.panel1.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 414);
+            this.label5.Location = new System.Drawing.Point(6, 411);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(220, 39);
+            this.label5.Size = new System.Drawing.Size(221, 52);
             this.label5.TabIndex = 9;
-            this.label5.Text = "F1 = Set/unset favourite\r\nDelete = remove entry\r\nShift+Delete = remove entry and " +
-    "delete folder";
+            this.label5.Text = "F1 sets/unsets favourite\r\nDelete removes entry\r\nShift+Delete removes entry and de" +
+    "letes folder\r\nCtrl+S saves configuration";
             // 
             // cbStatusWindow
             // 
             this.cbStatusWindow.AutoSize = true;
-            this.cbStatusWindow.Location = new System.Drawing.Point(275, 423);
+            this.cbStatusWindow.Location = new System.Drawing.Point(293, 414);
             this.cbStatusWindow.Name = "cbStatusWindow";
             this.cbStatusWindow.Size = new System.Drawing.Size(137, 17);
             this.cbStatusWindow.TabIndex = 10;
             this.cbStatusWindow.Text = "DOSBox status window";
             this.cbStatusWindow.UseVisualStyleBackColor = true;
             // 
+            // btnOpenDefaultConfig
+            // 
+            this.btnOpenDefaultConfig.Location = new System.Drawing.Point(8, 468);
+            this.btnOpenDefaultConfig.Name = "btnOpenDefaultConfig";
+            this.btnOpenDefaultConfig.Size = new System.Drawing.Size(83, 29);
+            this.btnOpenDefaultConfig.TabIndex = 8;
+            this.btnOpenDefaultConfig.Text = "Open default";
+            this.btnOpenDefaultConfig.UseVisualStyleBackColor = true;
+            this.btnOpenDefaultConfig.Click += new System.EventHandler(this.btnOpenDefaultConfig_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(869, 511);
+            this.ClientSize = new System.Drawing.Size(869, 533);
             this.Controls.Add(this.cbStatusWindow);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbFriendlyName);
@@ -309,6 +322,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbStatusWindow;
+        private System.Windows.Forms.Button btnOpenDefaultConfig;
     }
 }
 

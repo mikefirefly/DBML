@@ -299,5 +299,17 @@ namespace DBML
         {
             Process.Start("explorer.exe", "\"" + tbPath.Text.Replace('/', '\\') + "\"");
         }
+
+        private void tbDOSBoxConfig_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S)
+                if (e.Modifiers == Keys.Control)
+                    btnSave_Click(this, e);
+        }
+
+        private void btnOpenDefaultConfig_Click(object sender, EventArgs e)
+        {
+            Process.Start(defaultCfgFile);
+        }
     }
 }
