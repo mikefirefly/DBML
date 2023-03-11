@@ -168,40 +168,23 @@ namespace DBML
 
         private void lbEntryList_KeyDown(object sender, KeyEventArgs e)
         {
+            if (lbEntryList.SelectedIndex == -1) return;
             if (e.KeyCode == Keys.Delete)
-                if (lbEntryList.SelectedIndex == -1) return;
                 if (e.Modifiers == Keys.Shift)
+                {
+                    if (MessageBox.Show($"Are you sure you want to remove this entry and delete the whole {tbPath.Text} folder?", "Confirm entry removal", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        if (MessageBox.Show($"Are you sure you want to remove this entry and delete the whole {tbPath.Text} folder?", "Confirm entry removal", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            Directory.Delete(tbPath.Text, true);
-                            btnDelete_Click(this, null);
-                        }
+                        Directory.Delete(tbPath.Text, true);
+                        btnDelete_Click(this, null);
                     }
-                    else btnDelete_Click(this, null);
-
-            if (e.KeyCode == Keys.Delete)
-                if (lbEntryList.SelectedIndex == -1) return;
-                else
-                    if (e.Modifiers == Keys.Shift)
-                    {
-                        if (MessageBox.Show($"Are you sure you want to remove this entry and delete the whole {tbPath.Text} folder?", "Confirm entry removal", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            Directory.Delete(tbPath.Text, true);
-                            btnDelete_Click(this, null);
-                        }
-                    }
-                    else btnDelete_Click(this, null);
+                }
+                else btnDelete_Click(this, null);
 
             if (e.KeyCode == Keys.Enter)
-            {
-                if (lbEntryList.SelectedIndex == -1) return;
                 btnStart32_Click(this, e);
-            }
 
             if (e.KeyCode == Keys.F1)
             {
-                if (lbEntryList.SelectedIndex == -1) return;
                 if (tbFriendlyName.Text.StartsWith(favouriteEntryIndicator))
                     tbFriendlyName.Text = tbFriendlyName.Text.Remove(0, 1);
                 else tbFriendlyName.Text = favouriteEntryIndicator + tbFriendlyName.Text;
