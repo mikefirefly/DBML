@@ -45,9 +45,9 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpenPathInExplorer = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnOpenDefaultConfig = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbStatusWindow = new System.Windows.Forms.CheckBox();
-            this.btnOpenDefaultConfig = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,7 +149,7 @@
             this.btnStart32.Enabled = false;
             this.btnStart32.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnStart32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart32.Location = new System.Drawing.Point(241, 486);
+            this.btnStart32.Location = new System.Drawing.Point(241, 490);
             this.btnStart32.Name = "btnStart32";
             this.btnStart32.Size = new System.Drawing.Size(83, 29);
             this.btnStart32.TabIndex = 4;
@@ -168,7 +168,7 @@
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.Enabled = false;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDelete.Location = new System.Drawing.Point(117, 486);
+            this.btnDelete.Location = new System.Drawing.Point(117, 490);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(83, 29);
             this.btnDelete.TabIndex = 4;
@@ -240,15 +240,25 @@
             this.panel1.Size = new System.Drawing.Size(427, 509);
             this.panel1.TabIndex = 8;
             // 
+            // btnOpenDefaultConfig
+            // 
+            this.btnOpenDefaultConfig.Location = new System.Drawing.Point(8, 468);
+            this.btnOpenDefaultConfig.Name = "btnOpenDefaultConfig";
+            this.btnOpenDefaultConfig.Size = new System.Drawing.Size(83, 29);
+            this.btnOpenDefaultConfig.TabIndex = 8;
+            this.btnOpenDefaultConfig.Text = "Open default";
+            this.btnOpenDefaultConfig.UseVisualStyleBackColor = true;
+            this.btnOpenDefaultConfig.Click += new System.EventHandler(this.btnOpenDefaultConfig_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 411);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(221, 52);
+            this.label5.Size = new System.Drawing.Size(221, 65);
             this.label5.TabIndex = 9;
-            this.label5.Text = "F1 sets/unsets favourite\r\nDelete removes entry\r\nShift+Delete removes entry and de" +
-    "letes folder\r\nCtrl+S saves configuration";
+            this.label5.Text = "Enter starts the game\r\nF1 toggles favourite\r\nDelete removes entry\r\nShift+Delete r" +
+    "emoves entry and deletes folder\r\nCtrl+S saves configuration";
             // 
             // cbStatusWindow
             // 
@@ -259,16 +269,6 @@
             this.cbStatusWindow.TabIndex = 10;
             this.cbStatusWindow.Text = "DOSBox status window";
             this.cbStatusWindow.UseVisualStyleBackColor = true;
-            // 
-            // btnOpenDefaultConfig
-            // 
-            this.btnOpenDefaultConfig.Location = new System.Drawing.Point(8, 468);
-            this.btnOpenDefaultConfig.Name = "btnOpenDefaultConfig";
-            this.btnOpenDefaultConfig.Size = new System.Drawing.Size(83, 29);
-            this.btnOpenDefaultConfig.TabIndex = 8;
-            this.btnOpenDefaultConfig.Text = "Open default";
-            this.btnOpenDefaultConfig.UseVisualStyleBackColor = true;
-            this.btnOpenDefaultConfig.Click += new System.EventHandler(this.btnOpenDefaultConfig_Click);
             // 
             // MainForm
             // 
