@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-
+asdasdasdasdasdasdasd
 namespace TinyJson
 {
     // Really simple JSON parser in ~300 lines
