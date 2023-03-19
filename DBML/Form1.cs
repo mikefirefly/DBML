@@ -93,7 +93,7 @@ namespace DBML
         {
             if (lbEntryList.SelectedIndex != previdx)
                 previdx = lbEntryList.SelectedIndex;
-            else return;
+            //else return;
 
             if (lbEntryList.SelectedIndex == -1)
                 if (lbEntryList.Items.Count == 0)
@@ -174,8 +174,15 @@ namespace DBML
                 {
                     if (MessageBox.Show($"Are you sure you want to remove this entry and delete the whole {tbPath.Text} folder?", "Confirm entry removal", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        Directory.Delete(tbPath.Text, true);
-                        btnDelete_Click(this, null);
+                        try
+                        {
+                            Directory.Delete(tbPath.Text, true);
+                            btnDelete_Click(this, null);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Deleting directory failed: {0}", ex.Message);
+                        }
                     }
                 }
                 else btnDelete_Click(this, null);
